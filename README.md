@@ -5,9 +5,10 @@ A latex package enabled instructor to customize exam format and question content
 * Formatting
 ![preview.png](preview.png)
 * MC contents customizing
-![preview (2).png](preview (2).png)
+![preview(2).png](preview(2).png)
 * Permutation modifying
-![preview.png](preview.png)
+![preview(3).png](preview(3).png)
+![preview(4).png](preview(4).png)
 ---
 ## **Features**
 - **Student Features**:
