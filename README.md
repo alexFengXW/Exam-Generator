@@ -1,5 +1,5 @@
 # Exam-Generator
-A latex package enabled instructor to customize exam format and question contents, as well as permutation of chioces.
+A latex package enabled instructor to customize exam format and multiple chioce contents, as well as permutation of chioces.
 ---
 ## **Preview**
 * Formatting
