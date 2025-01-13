@@ -4,7 +4,7 @@ A latex package enabled instructor to customize exam format and question content
 ## **Preview**
 * Formatting
 <p align="center">
-![preview.png](preview.png)
+<src="preview.png">
 </p>
 * MC contents customizing
 <p align="center">
