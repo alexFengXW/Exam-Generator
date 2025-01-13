@@ -1,0 +1,313 @@
+\documentclass[12pt]{article}
+
+%-------------------------
+% PACKAGES
+%-------------------------
+\usepackage{amsmath} 
+\usepackage{tikz}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage[margin=1in]{geometry}
+\usepackage{xstring}
+\usepackage{needspace} 
+\usepackage{tabularx}   % For flexible table widths
+\usepackage{booktabs}   % For professional-looking tables
+\usepackage{xcolor}     % For coloring text (optional)
+\usepackage{array}      % For defining custom column types
+
+%-------------------------
+% FBOX PARAMETERS
+%-------------------------
+% Reduce padding and border thickness for slimmer boxes
+\setlength{\fboxsep}{3pt}    % Space between content and box
+\setlength{\fboxrule}{0.5pt} % Thickness of the box border
+
+%-------------------------
+% CUSTOM COLUMN TYPES
+%-------------------------
+% Define a new column type 'L' for left-aligned, vertically centered content
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+
+%-------------------------
+% HEADERS & FOOTERS
+%-------------------------
+\pagestyle{fancy}
+\fancyhf{}
+
+\setlength{\headheight}{28pt} 
+\setlength{\headsep}{25pt}
+
+\fancyhead[L]{\textbf{MATH 9999A\\Test 1}}
+\fancyhead[C]{\textbf{SID:} \tikz \node[draw, rectangle, rounded corners, 
+  minimum width=2in, minimum height=5mm] {};}
+\fancyhead[R]{\textbf{VERSION: A\\October 15, 2022}}
+\renewcommand{\headrulewidth}{2pt}
+\fancyfoot[C]{\thepage}
+
+%-------------------------
+% QUESTION & OPTIONS MACROS
+%-------------------------
+% Initialize option commands as commands with one argument
+\newcommand{\optionA}[1]{\def\optionAContent{#1}}
+\newcommand{\optionB}[1]{\def\optionBContent{#1}}
+\newcommand{\optionC}[1]{\def\optionCContent{#1}}
+\newcommand{\optionD}[1]{\def\optionDContent{#1}}
+\newcommand{\optionE}[1]{\def\optionEContent{#1}}
+
+% Command to print the appropriate option based on the label
+\newcommand{\printOption}[1]{%
+  \ifthenelse{\equal{#1}{A}}{\optionAContent}{}%
+  \ifthenelse{\equal{#1}{B}}{\optionBContent}{}%
+  \ifthenelse{\equal{#1}{C}}{\optionCContent}{}%
+  \ifthenelse{\equal{#1}{D}}{\optionDContent}{}%
+  \ifthenelse{\equal{#1}{E}}{\optionEContent}{}%
+}
+
+%-------------------------
+% LAYOUT MACROS
+%-------------------------
+% Normal Layout: Five options in a single row with fixed width
+\newcommand{\fixedLabelsReorderedContentNormal}[1]{%
+  % Extract each character from the reorder string
+  \StrChar{#1}{1}[\charA]
+  \StrChar{#1}{2}[\charB]
+  \StrChar{#1}{3}[\charC]
+  \StrChar{#1}{4}[\charD]
+  \StrChar{#1}{5}[\charE]
+  
+  % Reduce space between columns for tight alignment
+  \setlength{\tabcolsep}{2pt} % Default is 6pt
+  
+  % Adjust array rule width for thinner lines
+  \setlength{\arrayrulewidth}{0.5pt}
+  
+  % Begin tabular environment with five left-aligned, vertically centered columns
+  \begin{tabular}{|L{0.19\textwidth}|L{0.19\textwidth}|L{0.19\textwidth}|L{0.19\textwidth}|L{0.19\textwidth}|}
+    \hline
+    \textbf{A:}~\printOption{\charA} & 
+    \textbf{B:}~\printOption{\charB} & 
+    \textbf{C:}~\printOption{\charC} & 
+    \textbf{D:}~\printOption{\charD} & 
+    \textbf{E:}~\printOption{\charE} \\
+    \hline
+  \end{tabular}
+}
+
+% Enlarged Layout: Two columns per row to prevent empty rectangles
+\newcommand{\fixedLabelsReorderedContentEnlarged}[1]{%
+  % Extract each character from the reorder string
+  \StrChar{#1}{1}[\charA]
+  \StrChar{#1}{2}[\charB]
+  \StrChar{#1}{3}[\charC]
+  \StrChar{#1}{4}[\charD]
+  \StrChar{#1}{5}[\charE]
+  
+  % Adjust tabular parameters for better alignment
+  \setlength{\tabcolsep}{4pt} % Increased from 2pt to accommodate longer text
+  \setlength{\arrayrulewidth}{0.5pt} % Thinner lines
+  
+  % Begin tabular environment with two left-aligned, vertically centered columns
+  \begin{tabular}{|L{0.475\textwidth}|L{0.475\textwidth}|}
+    \hline
+    \textbf{A:}~\printOption{\charA} & 
+    \textbf{B:}~\printOption{\charB} \\
+    \hline
+    \textbf{C:}~\printOption{\charC} & 
+    \textbf{D:}~\printOption{\charD} \\
+    \hline
+    \multicolumn{2}{|L{0.95\textwidth}|}{\textbf{E:}~\printOption{\charE}} \\
+    \hline
+  \end{tabular}
+}
+
+% Single Long Layout: One option spans the full width, remaining options aligned vertically below
+\newcommand{\fixedLabelsReorderedContentSingleLong}[1]{%
+  % Extract each character from the reorder string
+  \StrChar{#1}{1}[\charA]
+  \StrChar{#1}{2}[\charB]
+  \StrChar{#1}{3}[\charC]
+  \StrChar{#1}{4}[\charD]
+  \StrChar{#1}{5}[\charE]
+  
+  % Reduce space between columns for tight alignment
+  \setlength{\tabcolsep}{2pt} % Default is 6pt
+  
+  % Adjust array rule width for thinner lines
+  \setlength{\arrayrulewidth}{0.5pt}
+  
+  % Begin tabular environment with single column spanning full width
+  \begin{tabular}{|L{0.95\textwidth}|}
+    \hline
+    \textbf{A:}~\printOption{\charA} \\
+    \hline
+    \textbf{B:}~\printOption{\charB} \\
+    \hline
+    \textbf{C:}~\printOption{\charC} \\
+    \hline
+    \textbf{D:}~\printOption{\charD} \\
+    \hline
+    \textbf{E:}~\printOption{\charE} \\
+    \hline
+  \end{tabular}
+}
+
+%-------------------------
+% MULTIPLE CHOICE QUESTION MACROS
+%-------------------------
+% Macro for normal questions with five options in one row
+\newcounter{question}
+\newcommand{\makeMCQ}[2]{%
+  \stepcounter{question}%
+  \Needspace{15\baselineskip} % Ensures there's enough space for the question
+  \begin{samepage} % Prevents page breaks within the question
+    \noindent \textbf{\large Question \thequestion. #1} % Question text
+    \vspace{0.5em} % Space between question and options
+    \fixedLabelsReorderedContentNormal{#2} % Display options in normal layout
+    \vspace{1em} % Space before the next question
+  \end{samepage}
+}
+
+% Macro for enlarged questions with two columns per row
+\newcommand{\makeMCQEnlarged}[2]{%
+  \stepcounter{question}%
+  \Needspace{25\baselineskip} % Ensures there's enough space for the question and two rows of options
+  \begin{samepage} % Prevents page breaks within the question
+    \noindent \textbf{\large Question \thequestion. #1} % Question text
+    \vspace{0.5em} % Space between question and options
+    \fixedLabelsReorderedContentEnlarged{#2} % Display options in enlarged layout
+    \vspace{1em} % Space before the next question
+  \end{samepage}
+}
+
+% Macro for questions with one super long option spanning the entire line
+\newcommand{\makeMCQSingleLong}[2]{%
+  \stepcounter{question}%
+  \Needspace{35\baselineskip} % Ensures there's enough space for the question and all options
+  \begin{samepage} % Prevents page breaks within the question
+    \noindent \textbf{\large Question \thequestion. #1} % Question text
+    \vspace{0.5em} % Space between question and options
+    \fixedLabelsReorderedContentSingleLong{#2} % Display options with single long option
+    \vspace{1em} % Space before the next question
+  \end{samepage}
+}
+
+%-------------------------
+% DOCUMENT BODY
+%-------------------------
+\begin{document}
+
+%-----------------------
+% Question 1 (Normal Layout)
+%-----------------------
+\optionA{Donald Trump}
+\optionB{Joe Biden}
+\optionC{Bill Clinton}
+\optionD{George Bush}
+\optionE{Barack Obama}
+\makeMCQ{Who is the president of the USA?}{ABCDE}
+
+%-----------------------
+% Question 2 (Normal Layout)
+%-----------------------
+\optionA{1}
+\optionB{2}
+\optionC{3}
+\optionD{4}
+\optionE{5}
+\makeMCQ{What is 2 + 2?}{CABDE}
+
+%-----------------------
+% Question 3 (Normal Layout)
+%-----------------------
+\optionA{Merge Sort}
+\optionB{Quick Sort}
+\optionC{Bubble Sort}
+\optionD{Insertion Sort}
+\optionE{Radix Sort}
+\makeMCQ{Which sorting algorithm typically has \(O(n^2)\) average time complexity?}{CABDE}
+
+%-----------------------
+% Question 4 (Normal Layout)
+%-----------------------
+\optionA{\(x^3\)}
+\optionB{\(1\)}
+\optionC{\(2x\)}
+\optionD{\(4x^2\)}
+\optionE{\(\frac{1}{x}\)}
+\makeMCQ{What is the derivative of \(x^2\)?}{ABCED}
+
+%-----------------------
+% Question 5 (Normal Layout)
+%-----------------------
+\optionA{\(\tfrac{1}{2} e^{2x}\)}
+\optionB{\(2 e^{2x}\)}
+\optionC{\(x e^{2x}\)}
+\optionD{\(e^x\)}
+\optionE{\(e^{2x}\)}
+\makeMCQ{Compute \(\displaystyle \int e^{2x}\, dx.\)}{AECBD}
+
+%-----------------------
+% Question 6 (Normal Layout)
+%-----------------------
+\optionA{\(0\)}
+\optionB{\(1\)}
+\optionC{\(2\)}
+\optionD{\(\infty\)}
+\optionE{\(\text{Does not exist}\)}
+\makeMCQ{Evaluate \(\displaystyle \lim_{x \to 0} \frac{\sin x}{x}.\)}{BACDE}
+
+%-----------------------
+% Question 7 (Enlarged Layout)
+%-----------------------
+\optionA{\((x - y)(x + y)\)}
+\optionB{\((x - y)(x^2 + xy + y^2)\)}
+\optionC{\((x + y)(x^2 - xy + y^2)\)}
+\optionD{\((x^3 - y^3)(x - y)\)}
+\optionE{\((x - y)^3\)}
+\makeMCQEnlarged{Which is the correct factorization of \(x^3 - y^3\)?}{BCDAB}
+
+%-----------------------
+% Question 8 (Single Long Layout)
+%-----------------------
+\optionA{An exceptionally long option that exceeds half of the text width to test text wrapping within the designated rectangle.}
+\optionB{Another lengthy option that requires the rectangle to be enlarged to accommodate the extended text without overflow.}
+\optionC{A standard short option.}
+\optionD{A moderately long option to ensure that the rectangle adjusts its size appropriately.}
+\optionE{Yet another long option that tests the flexibility of the rectangle sizing in the LaTeX document.}
+\makeMCQSingleLong{Evaluate the following statements regarding advanced calculus topics.}{ABCDE}
+
+%-----------------------
+% Additional Example Questions
+%-----------------------
+
+%-----------------------
+% Question 9 (Normal Layout)
+%-----------------------
+\optionA{\(f(x) = x^2\)}
+\optionB{\(f(x) = \sin x\)}
+\optionC{\(f(x) = e^x\)}
+\optionD{\(f(x) = \ln x\)}
+\optionE{\(f(x) = \sqrt{x}\)}
+\makeMCQ{Which function is its own derivative?}{ABCDE}
+
+%-----------------------
+% Question 10 (Enlarged Layout)
+%-----------------------
+\optionA{The integral of \(\frac{1}{x}\) is \(\ln |x| + C\).}
+\optionB{The derivative of \(e^{x}\) is \(e^{x}\).}
+\optionC{The limit of \(\frac{\sin x}{x}\) as \(x \to 0\) is 1.}
+\optionD{The derivative of \(\ln x\) is \(\frac{1}{x}\).}
+\optionE{The integral of \(x\) is \(\frac{1}{2}x^2 + C\).}
+\makeMCQEnlarged{Which of the following statements are true about calculus functions?}{ABCDE}
+
+%-----------------------
+% Question 11 (Single Long Layout)
+%-----------------------
+\optionA{Given the function \(f(x) = x^3 - 3x + 2\), find all real roots and verify them by substitution.}
+\optionB{Determine the convergence of the series \(\sum_{n=1}^{\infty} \frac{1}{n^2}\) using the p-test.}
+\optionC{Compute the limit \(\lim_{x \to \infty} \frac{e^x}{x^n}\) for any positive integer \(n\).}
+\optionD{Find the second derivative of \(f(x) = \sin(x)\) and interpret its geometric meaning.}
+\optionE{Evaluate the definite integral \(\int_{0}^{\pi} \sin(x) \, dx\) and explain its significance.}
+\makeMCQSingleLong{Answer the following advanced calculus problems.}{ABCDE}
+
+\end{document}
