@@ -3,18 +3,12 @@ A latex package enabled instructor to customize exam format and question content
 ---
 ## **Preview**
 * Formatting
-<p align="center">
-<src="preview.png">
-</p>
+
 * MC contents customizing
-<p align="center">
-![preview(2).png](preview(2).png)
-</p>
+
 * Permutation modifying
-<p align="center">
 ![preview(3).png](preview(3).png)
 ![preview(4).png](preview(4).png)
-</p>
 ---
 ## **Features**
 - **Student Features**:
